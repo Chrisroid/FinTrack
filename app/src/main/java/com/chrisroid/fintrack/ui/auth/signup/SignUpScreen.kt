@@ -1,70 +1,119 @@
 package com.chrisroid.fintrack.ui.auth.signup
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.chrisroid.fintrack.navigation.Routes
+import com.chrisroid.fintrack.ui.base.CustomButton
+import com.chrisroid.fintrack.ui.theme.appText
 
 @Composable
 fun SignUpScreen(navController: NavController) {
+    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var referral by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(horizontal = 24.dp),
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Text("Create Account", style = MaterialTheme.typography.headlineMedium)
+        Column {
+            Spacer(modifier = Modifier.height(24.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Let’s get started! 🎉",
+                style = appText.copy(
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            )
 
-        OutlinedTextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Email") },
-            modifier = Modifier.fillMaxWidth()
-        )
+            Spacer(modifier = Modifier.height(8.dp))
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Join us and start managing your finances\nwith Fintrack today.",
+                style = appText.copy(fontSize = 16.sp)
+            )
 
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth()
-        )
+            Spacer(modifier = Modifier.height(24.dp))
 
-        Spacer(modifier = Modifier.height(24.dp))
+            Text("First & Last Name", style = appText.copy(fontSize = 14.sp))
+            Spacer(modifier = Modifier.height(8.dp))
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                placeholder = { Text("e.g John Doe") },
+                modifier = Modifier.fillMaxWidth()
+            )
 
-        Button(
-            onClick = { navController.navigate(Routes.VERIFICATION) },
-            modifier = Modifier.fillMaxWidth(),
-            enabled = email.isNotBlank() && password.length >= 6
-        ) {
-            Text("Continue")
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text("Email address", style = appText.copy(fontSize = 14.sp))
+            Spacer(modifier = Modifier.height(8.dp))
+            OutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                placeholder = { Text("e.g email@mail.com") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text("Enter a referral code (optional)", style = appText.copy(fontSize = 14.sp))
+            Spacer(modifier = Modifier.height(8.dp))
+            OutlinedTextField(
+                value = referral,
+                onValueChange = { referral = it },
+                placeholder = { Text("e.g email@mail.com") },
+                modifier = Modifier.fillMaxWidth()
+            )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        TextButton(
-            onClick = { navController.navigate(Routes.LOGIN) }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(bottom = 16.dp)
         ) {
-            Text("Already have an account? Login")
+            CustomButton(
+                text = "Create an account",
+                onClick = { navController.navigate(Routes.VERIFICATION) },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text("Already have an account? ", style = appText.copy(fontSize = 14.sp))
+                Text(
+                    "Sign In",
+                    style = appText.copy(
+                        fontSize = 14.sp,
+                        color = Color(0xFF008080),
+                        fontWeight = FontWeight.Bold,
+                        textDecoration = TextDecoration.Underline
+                    ),
+                    modifier = Modifier.clickable {
+                        navController.navigate(Routes.LOGIN)
+                    }
+
+                )
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ fun CustomButton(
     modifier: Modifier = Modifier.padding(horizontal = 24.dp),
     backgroundColor: Color = Color(0xFF008080),
     contentColor: Color = Color.White,
-    height: Dp = 40.dp
+    height: Dp = 45.dp
 ) {
     Button(
         onClick = onClick,
