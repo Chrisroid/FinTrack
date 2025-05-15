@@ -49,11 +49,32 @@ val onboardingPages = listOf(
     )
 )
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
 @Composable
 fun OnboardingScreen(navController: NavController) {
     val pagerState = rememberPagerState()
-    val scope = rememberCoroutineScope()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    val coroutineScope = rememberCoroutineScope()
+    var showSheet by remember { mutableStateOf(false) }
+
+    if (showSheet) {
+        ModalBottomSheet(
+            onDismissRequest = { showSheet = false },
+            sheetState = sheetState,
+            containerColor = Color.White,
+            tonalElevation = 2.dp
+        ) {
+            TermsBottomSheet(
+                onAccept = {
+                    showSheet = false
+                    navController.navigate(Routes.SIGNUP)
+                },
+                onClose = {
+                    showSheet = false
+                }
+            )
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -64,7 +85,6 @@ fun OnboardingScreen(navController: NavController) {
     ) {
         Spacer(modifier = Modifier.height(10.dp))
 
-        // ✅ Static Indicator (doesn't move with pager)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -86,10 +106,8 @@ fun OnboardingScreen(navController: NavController) {
             }
         }
 
-
         Spacer(modifier = Modifier.height(8.dp))
 
-        // ✅ Pager below the indicator
         HorizontalPager(
             count = onboardingPages.size,
             state = pagerState,
@@ -103,18 +121,14 @@ fun OnboardingScreen(navController: NavController) {
 
         CustomButton(
             text = "Create an account",
-            onClick = { navController.navigate(Routes.SIGNUP) },
+            onClick = { showSheet = true }
         )
 
         Row(
             modifier = Modifier.padding(16.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            Text(
-                "Already have an account? ",
-                style = appText,
-                fontSize = 16.sp
-            )
+            Text("Already have an account? ", style = appText, fontSize = 16.sp)
             Text(
                 text = "Sign in",
                 style = appText.copy(
