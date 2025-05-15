@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.chrisroid.fintrack.navigation.Routes
 import com.chrisroid.fintrack.ui.base.CustomButton
+import com.chrisroid.fintrack.ui.base.TextInput
 import com.chrisroid.fintrack.ui.theme.appText
 
 @Composable
@@ -61,25 +62,20 @@ fun SignUpScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text("Email address", style = appText.copy(fontSize = 14.sp))
-            Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                placeholder = { Text("e.g email@mail.com") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                modifier = Modifier.fillMaxWidth()
+            TextInput(
+                title = "Email address",
+                placeholder = "e.g email@mail.com",
+                code = email,
+                onCodeChange = { email = it }
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text("Enter a referral code (optional)", style = appText.copy(fontSize = 14.sp))
-            Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(
-                value = referral,
-                onValueChange = { referral = it },
-                placeholder = { Text("e.g email@mail.com") },
-                modifier = Modifier.fillMaxWidth()
+            TextInput(
+                title = "Enter a referral code (optional)",
+                placeholder = "e.g email@mail.com",
+                code = referral,
+                onCodeChange = { referral = it }
             )
         }
 
