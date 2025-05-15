@@ -2,6 +2,7 @@ package com.chrisroid.fintrack.ui.auth.onboarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
@@ -10,6 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -17,6 +20,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.chrisroid.fintrack.R
 import com.chrisroid.fintrack.navigation.Routes
+import com.chrisroid.fintrack.ui.base.CustomButton
+import com.chrisroid.fintrack.ui.theme.appText
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 
@@ -57,7 +62,7 @@ fun OnboardingScreen(navController: NavController) {
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         // ✅ Static Indicator (doesn't move with pager)
         Row(
@@ -82,7 +87,7 @@ fun OnboardingScreen(navController: NavController) {
         }
 
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         // ✅ Pager below the indicator
         HorizontalPager(
@@ -96,29 +101,30 @@ fun OnboardingScreen(navController: NavController) {
             )
         }
 
-        Button(
+        CustomButton(
+            text = "Create an account",
             onClick = { navController.navigate(Routes.SIGNUP) },
-            shape = CircleShape,
-            modifier = Modifier
-                .padding(horizontal = 24.dp)
-                .fillMaxWidth()
-                .height(56.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF007D82),
-                contentColor = Color.White
-            )
-        ) {
-            Text("Create an account")
-        }
+        )
 
         Row(
             modifier = Modifier.padding(16.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            Text("Already have an account? ")
-            TextButton(onClick = { navController.navigate(Routes.LOGIN) }) {
-                Text("Sign in", color = Color(0xFF007D82))
-            }
+            Text(
+                "Already have an account? ",
+                style = appText,
+                fontSize = 16.sp
+            )
+            Text(
+                text = "Sign in",
+                style = appText.copy(
+                    fontSize = 16.sp,
+                    color = Color(0xFF008080)
+                ),
+                modifier = Modifier.clickable {
+                    navController.navigate(Routes.LOGIN)
+                }
+            )
         }
     }
 }
@@ -133,13 +139,13 @@ fun OnboardingPageContent(page: OnboardingPage, currentPage: Int) {
         verticalArrangement = Arrangement.Top
     ) {
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         Text(
             text = page.title,
             fontSize = 28.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
+            style = appText,
+            textAlign = TextAlign.Start,
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -148,8 +154,7 @@ fun OnboardingPageContent(page: OnboardingPage, currentPage: Int) {
         Text(
             text = page.description,
             fontSize = 16.sp,
-            textAlign = TextAlign.Center,
-            color = Color.DarkGray,
+            style = appText,
             modifier = Modifier.fillMaxWidth()
         )
 
