@@ -24,17 +24,21 @@ fun CustomButton(
     modifier: Modifier = Modifier.padding(horizontal = 24.dp),
     backgroundColor: Color = Color(0xFF008080),
     contentColor: Color = Color.White,
-    height: Dp = 45.dp
+    height: Dp = 45.dp,
+    enabled: Boolean = true
 ) {
     Button(
         onClick = onClick,
         shape = CircleShape,
+        enabled = enabled,
         modifier = modifier
             .fillMaxWidth()
             .height(height),
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor,
-            contentColor = contentColor
+            contentColor = contentColor,
+            disabledContainerColor = Color.LightGray, // optional
+            disabledContentColor = Color.DarkGray     // optional
         )
     ) {
         Text(
@@ -45,3 +49,4 @@ fun CustomButton(
         )
     }
 }
+
