@@ -89,7 +89,6 @@ fun TermsAndPrivacyText(
         pushStringAnnotation(tag = "TERMS", annotation = "terms")
         withStyle(
             style = SpanStyle(
-                color = Color(0xFF008080),
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline
             )
@@ -103,7 +102,6 @@ fun TermsAndPrivacyText(
         pushStringAnnotation(tag = "PRIVACY", annotation = "privacy")
         withStyle(
             style = SpanStyle(
-                color = Color(0xFF008080),
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline
             )
