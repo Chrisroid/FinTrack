@@ -21,6 +21,15 @@ import com.chrisroid.fintrack.ui.theme.appText
 fun VerificationScreen(navController: NavController) {
     var code by remember { mutableStateOf("") }
 
+    var remainingSeconds by remember { mutableStateOf(50) }
+
+    LaunchedEffect(Unit) {
+        while (remainingSeconds > 0) {
+            kotlinx.coroutines.delay(1000L)
+            remainingSeconds--
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -87,14 +96,18 @@ fun VerificationScreen(navController: NavController) {
                     style = appText.copy(fontSize = 14.sp, color = Color.Gray)
                 )
                 Text(
-                    text = "Resend code in 50s",
+                    text = if (remainingSeconds > 0)
+                        "Resend code in ${remainingSeconds}s"
+                    else
+                        "Resend Code",
                     style = appText.copy(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF008080)
                     ),
-                    modifier = Modifier.clickable {
-                        // TODO: Handle resend
+                    modifier = Modifier.clickable(enabled = remainingSeconds == 0) {
+                        // TODO: Handle resend action here
+                        remainingSeconds = 50
                     }
                 )
             }
