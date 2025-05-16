@@ -102,10 +102,13 @@ fun NavGraphBuilder.mainNavGraph(navController: NavController) {
         )}
 
         // Expenses group
-        composable(Routes.EXPENSES) { ExpensesScreen(
-            onAllExpenses = { navController.navigate(Routes.ALL_EXPENSES) },
-            onSortExpenses = { navController.navigate(Routes.SORT_EXPENSES) }
-        )}
+        composable(Routes.EXPENSES) {
+            ExpensesScreen(
+                onAllExpenses = { navController.navigate(Routes.ALL_EXPENSES) },
+                onSortExpenses = { navController.navigate(Routes.SORT_EXPENSES) }
+            )
+        }
+
         composable(Routes.ALL_EXPENSES) { AllExpensesScreen() }
         composable(Routes.SORT_EXPENSES) { SortExpensesScreen() }
 

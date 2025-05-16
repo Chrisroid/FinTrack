@@ -123,7 +123,6 @@ fun AccountScreen() {
                 modifier = Modifier
                     .matchParentSize()
             )
-
             Card(
                 shape = RoundedCornerShape(12.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.Transparent),
