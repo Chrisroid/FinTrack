@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -39,14 +40,30 @@ fun BudgetDetailsScreen() {
     ) {
         // Header
         Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = {  }) {
-                Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color(0xFF007D82))
-            }
-            Spacer(modifier = Modifier.width(8.dp))
-            Text("Trip to Nairobi", style = appText.copy(fontSize = 20.sp, fontWeight = FontWeight.Bold))
+            Icon(
+                imageVector = Icons.Default.ChevronLeft,
+                contentDescription = "Back",
+                modifier = Modifier
+                    .size(30.dp)
+                    .background(Color(0xFFFFE6CC), shape = CircleShape)
+                    .padding(6.dp)
+                    .clickable { /* TODO: handle back press */ }
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Text(
+                text = "Trip to Nairobi",
+                style = appText.copy(fontSize = 20.sp, fontWeight = FontWeight.Bold),
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+
+            Spacer(modifier = Modifier.weight(1f)) // balances the row
         }
 
         Spacer(modifier = Modifier.height(16.dp))

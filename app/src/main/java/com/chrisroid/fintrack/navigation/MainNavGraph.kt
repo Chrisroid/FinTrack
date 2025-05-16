@@ -75,8 +75,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavController) {
 
         // Savings group
         composable(Routes.SAVINGS) { SavingsScreen(
-            onCreateSavings = { navController.navigate(Routes.CREATE_SAVINGS_1) },
-            onSavingsList = { navController.navigate(Routes.SAVINGS_LIST) }
+            onSavingsClick = {navController.navigate(Routes.CREATE_SAVINGS_1)}
         )}
         composable(Routes.CREATE_SAVINGS_1) {
             CreateSavingsScreen1 { navController.navigate(Routes.CREATE_SAVINGS_2) }
@@ -91,11 +90,11 @@ fun NavGraphBuilder.mainNavGraph(navController: NavController) {
             SavingsPreviewScreen { navController.navigate(Routes.SAVINGS_DETAILS) }
         }
         composable(Routes.SAVINGS_DETAILS) { SavingsDetailsScreen() }
-        composable(Routes.SAVINGS_LIST) { SavingsListScreen(
-            onSavingsClick = { savingsId ->
-                navController.navigate("${Routes.SAVINGS_DETAILS}/$savingsId")
-            }
-        )}
+//        composable(Routes.SAVINGS_LIST) { SavingsListScreen(
+//            onSavingsClick = { savingsId ->
+//                navController.navigate("${Routes.SAVINGS_DETAILS}/$savingsId")
+//            }
+//        )}
 
         // Expenses group
         composable(Routes.EXPENSES) {
