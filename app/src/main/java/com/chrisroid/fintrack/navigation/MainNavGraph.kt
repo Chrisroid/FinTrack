@@ -26,7 +26,6 @@ import com.chrisroid.fintrack.ui.main.savings.CreateSavingsScreen1
 import com.chrisroid.fintrack.ui.main.savings.CreateSavingsScreen2
 import com.chrisroid.fintrack.ui.main.savings.CreateSavingsScreen3
 import com.chrisroid.fintrack.ui.main.savings.SavingsDetailsScreen
-import com.chrisroid.fintrack.ui.main.savings.SavingsListScreen
 import com.chrisroid.fintrack.ui.main.savings.SavingsPreviewScreen
 import com.chrisroid.fintrack.ui.main.savings.SavingsScreen
 
@@ -78,7 +77,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavController) {
             onSavingsClick = {navController.navigate(Routes.CREATE_SAVINGS_1)}
         )}
         composable(Routes.CREATE_SAVINGS_1) {
-            CreateSavingsScreen1 { navController.navigate(Routes.CREATE_SAVINGS_2) }
+            CreateSavingsScreen1()
         }
         composable(Routes.CREATE_SAVINGS_2) {
             CreateSavingsScreen2 { navController.navigate(Routes.CREATE_SAVINGS_3) }
