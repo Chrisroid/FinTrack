@@ -44,10 +44,13 @@ import com.chrisroid.fintrack.ui.theme.appText
 
 @Composable
 fun ExpensesScreen(onAllExpenses: () -> Unit, onSortExpenses: () -> Unit) {
+    val scrollState = rememberScrollState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
+            .verticalScroll(scrollState)
             .padding(horizontal = 16.dp)
     ) {
         Spacer(modifier = Modifier.height(16.dp))

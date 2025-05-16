@@ -11,9 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -23,7 +20,6 @@ import com.chrisroid.fintrack.navigation.Routes
 import com.chrisroid.fintrack.ui.base.CustomButton
 import com.chrisroid.fintrack.ui.theme.appText
 import com.google.accompanist.pager.*
-import kotlinx.coroutines.launch
 
 data class OnboardingPage(
     val imageRes: Int,
@@ -114,8 +110,7 @@ fun OnboardingScreen(navController: NavController) {
             modifier = Modifier.weight(1f)
         ) { page ->
             OnboardingPageContent(
-                page = onboardingPages[page],
-                currentPage = pagerState.currentPage
+                page = onboardingPages[page]
             )
         }
 
@@ -144,7 +139,7 @@ fun OnboardingScreen(navController: NavController) {
 }
 
 @Composable
-fun OnboardingPageContent(page: OnboardingPage, currentPage: Int) {
+fun OnboardingPageContent(page: OnboardingPage) {
     Column(
         modifier = Modifier
             .fillMaxSize()

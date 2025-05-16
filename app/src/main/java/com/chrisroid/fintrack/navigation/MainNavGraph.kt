@@ -38,10 +38,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavController) {
     ) {
         // Home group
         composable(Routes.MAIN_HOME) {
-            HomeScreen(
-                onInsightsClick = { navController.navigate(Routes.INSIGHTS) },
-                onLinkedAccountsClick = { navController.navigate(Routes.LINKED_ACCOUNTS) }
-            )
+            HomeScreen()
         }
         composable(Routes.INSIGHTS) { InsightsScreen() }
         composable(Routes.LINKED_ACCOUNTS) { LinkedAccountsScreen(
