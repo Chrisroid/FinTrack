@@ -54,10 +54,7 @@ fun NavGraphBuilder.mainNavGraph(navController: NavController) {
         }
 
         // Budgets group
-        composable(Routes.BUDGETS) { BudgetsScreen(
-            onCreateBudget = { navController.navigate(Routes.CREATE_BUDGET_1) },
-            onBudgetList = { navController.navigate(Routes.BUDGET_LIST) }
-        )}
+        composable(Routes.BUDGETS) { BudgetsScreen()}
         composable(Routes.CREATE_BUDGET_1) {
             CreateBudgetScreen1 { navController.navigate(Routes.CREATE_BUDGET_2) }
         }
