@@ -2,6 +2,7 @@ package com.chrisroid.fintrack.ui.main.budgets
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -35,7 +36,7 @@ import com.chrisroid.fintrack.R
 import com.chrisroid.fintrack.ui.theme.appText
 
 @Composable
-fun BudgetsScreen() {
+fun BudgetsScreen(onBudgetClick: () -> Unit) {
     val budgets = listOf(
         BudgetItem(
             title = "Monthly budget",
@@ -73,7 +74,10 @@ fun BudgetsScreen() {
         Spacer(modifier = Modifier.height(12.dp))
 
         budgets.forEachIndexed { index, budget ->
-            BudgetCard(budget)
+            BudgetCard(
+                budget,
+                onClick = onBudgetClick
+            )
             if (index == 0) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Text("Other budgets", style = appText.copy(fontSize = 20.sp, fontWeight = FontWeight.SemiBold))
@@ -100,10 +104,11 @@ fun BudgetsScreen() {
 }
 
 @Composable
-fun BudgetCard(budget: BudgetItem) {
+fun BudgetCard(budget: BudgetItem, onClick: () -> Unit, showEasy : Boolean = false) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick() }
             .padding(vertical = 8.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
@@ -182,6 +187,23 @@ fun BudgetCard(budget: BudgetItem) {
                         Text("Total Budget", style = appText.copy(fontSize = 16.sp, color = Color.Gray))
                         Text(budget.total, style = appText.copy(fontWeight = FontWeight.Bold, fontSize = 20.sp))
                     }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                if (showEasy){
+                    Surface(
+                        color = Color(0xFFFFE6CC),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            "You need to take it easy",
+                            style = appText.copy(fontSize = 14.sp, color = Color.Black),
+                            modifier = Modifier.padding(12.dp)
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }
